@@ -320,11 +320,11 @@ void read_floats_fp16(char* & ptr, OPT* out, int64_t n, int nsc) {
     unsigned short exp = *bptr++;
     OPT max = unmap_fp16_exp(exp);
     OPT min = -max;
-
+    
     for (int i=0;i<nsc;i++) {
       ev[i] = fp_unmap( *bptr++, min, max, SHRT_UMAX );
     }
-
+    
   }
 
 }
@@ -359,11 +359,11 @@ int read_meta(char* root, _evc_meta_& args) {
 	*r = '\0';
 	i = atoi(r+1);
 	
-#define PARSE_ARRAY(n) \	
+#define PARSE_ARRAY(n)                          \
 	if (!strcmp(buf,#n)) {			\
 	  args.n[i] = atoi(val);		\
 	}
-
+	
 	PARSE_ARRAY(s) else
 	  PARSE_ARRAY(b) else
 	    PARSE_ARRAY(nb) else
@@ -466,7 +466,7 @@ int main(int argc, char* argv[]) {
     printf("number of blocks = %d\n",args.blocks);
     printf("f_size_block = %d\n",f_size_block);
 
-    printf("Internally using sizeof(OPT) = %d\n",sizeof(OPT));
+    printf("Internally using sizeof(OPT) = %lu\n",sizeof(OPT));
 
     printf("\n");
 

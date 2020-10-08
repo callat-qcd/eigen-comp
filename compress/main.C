@@ -428,7 +428,7 @@ int main(int argc, char* argv[]) {
     printf("number of blocks = %d\n",args.blocks);
     printf("f_size_block = %d\n",f_size_block);
 
-    printf("Internally using sizeof(OPT) = %d\n",sizeof(OPT));
+    printf("Internally using sizeof(OPT) = %lu\n", sizeof(OPT));
 
     printf("\n");
   }

@@ -1,0 +1,25 @@
+.SUFFIXES:
+.SUFFIXES:  .o .C
+
+SRCS :=$(wildcard *.C)
+OBJS_SRC=$(SRCS:.C=.o)
+OBJS := $(notdir $(OBJS_SRC))
+
+OMP_PATH=/usr/local/opt/libomp
+
+CXX=g++
+LDFLAGS= -L$(OMP_PATH)/lib -lomp 
+#FPMODEL=-fp-model consistent
+FPMODEL=
+CXXFLAGS=-O3 -DOPT=double $(FPMODEL)
+
+BIN=evc
+
+$(BIN): $(OBJS)
+	$(CXX) $(OBJS) $(LDFLAGS) -o $(BIN)
+
+.C.o:
+	$(CXX) -o $@ $(CXXFLAGS) -DCXXFLAGS="\"$(CXXFLAGS)\"" -c $<
+
+clean:
+	rm -f *.o  $(BIN)
